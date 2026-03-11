@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOID // 2026+  //  EE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            /* ✅ MOBİL: Zoom engelleme */
+            touch-action: manipulation;
+        }
+
+        body {
+            background: #FFFFFF;
+            color: #000000;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            /* ✅ MOBİL: Safe area (notch, home indicator) */
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) 
+                     env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .terminal {
+            width: 100%;
+            max-width: 900px;
+            padding: 40px 25px;
+            text-align: center;
+            /* ✅ MOBİL: İçerik taşmasını önle */
+            max-height: 100vh;
+            overflow: hidden;
+        }
+
+        .line {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 2.4;
+            letter-spacing: 0.5px;
+            min-height: 34px;
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .line.bold {
+            font-weight: 700;
+        }
+
+        .line.label {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 15px;
+        }
+
+        .line.number {
+            font-size: 14px;
+            font-weight: 700;
+            color: #000000;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 9px;
+            height: 17px;
+            background: #000000;
+            margin-left: 3px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #FF3B30;
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: pulse 1s ease-in-out infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 30px;
+        }
+
+        .footer-line {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 2.4;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+            /* ✅ MOBİL: Touch area */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 3px;
+            animation: pulseText 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* ===========================================
+           ✅ MOBİL OPTİMİZASYONLARI (Dinamik Font)
+           =========================================== */
+        
+        /* Tablet (768px ve altı) */
+        @media (max-width: 768px) {
+            .terminal { padding: 30px 20px; }
+            .line { font-size: 13px; line-height: 2.2; }
+            .line.label { font-size: 10px; letter-spacing: 1px; }
+            .line.number { font-size: 13px; }
+            .footer-line { font-size: 13px; }
+        }
+
+        /* Küçük Telefon (480px ve altı) */
+        @media (max-width: 480px) {
+            .line { font-size: 12px; }
+            .line.number { font-size: 12px; }
+            .footer-line { font-size: 12px; }
+        }
+
+        /* ✅ KÜÇÜK EKRAN YÜKSEKLİĞİ (600px ve altı) */
+        @media (max-height: 600px) {
+            .terminal { padding: 20px 15px; }
+            .line { font-size: 11px; line-height: 2; min-height: 28px; }
+            .line.bold { font-size: 11px; }
+            .line.label { font-size: 9px; margin-top: 10px; }
+            .line.number { font-size: 11px; }
+            .footer { margin-top: 25px; padding-top: 20px; }
+            .footer-line { font-size: 11px; line-height: 2; }
+            .cursor { width: 7px; height: 14px; }
+        }
+
+        /* ✅ ÇOK KÜÇÜK EKRAN (500px ve altı - iPhone SE gibi) */
+        @media (max-height: 500px) {
+            .terminal { padding: 15px 12px; }
+            .line { font-size: 10px; line-height: 1.9; min-height: 25px; }
+            .line.bold { font-size: 10px; }
+            .line.label { font-size: 8px; margin-top: 8px; }
+            .line.number { font-size: 10px; }
+            .footer { margin-top: 20px; padding-top: 15px; }
+            .footer-line { font-size: 10px; line-height: 1.9; }
+            .cursor { width: 6px; height: 12px; }
+        }
+
+        /* ✅ LANDSCAPE MOD (Yatay telefon) */
+        @media (max-height: 400px) and (orientation: landscape) {
+            .terminal { padding: 10px 20px; }
+            .line { font-size: 9px; line-height: 1.8; min-height: 22px; }
+            .line.bold { font-size: 9px; }
+            .line.label { font-size: 7px; margin-top: 6px; }
+            .line.number { font-size: 9px; }
+            .footer { margin-top: 15px; padding-top: 10px; }
+            .footer-line { font-size: 9px; line-height: 1.8; }
+            .cursor { width: 5px; height: 11px; }
+        }
+
+        /* ✅ KEYBOARD AÇIKKEN (Visual Viewport API) */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader" onclick="startApp()">
+        <div class="loader-text">CLICK TO START</div>
+    </div>
+
+    <main class="terminal">
+        <span class="line bold" id="line1"></span>
+        <span class="line bold" id="line2"></span>
+        <span class="line bold" id="line3"></span>
+        
+        <span class="line label" id="label1"></span>
+        <span class="line number" id="value1"></span>
+        
+        <span class="line label" id="label2"></span>
+        <span class="line number" id="value2"></span>
+        
+        <span class="line label" id="label3"></span>
+        <span class="line number" id="value3"></span>
+        
+        <span class="line label" id="label4"></span>
+        <span class="line number" id="value4"></span>
+
+        <div class="footer">
+            <span class="line footer-line bold" id="line4"></span>
+            <span class="line footer-line bold" id="line5"></span>
+            <span class="line footer-line" id="line6"></span>
+        </div>
+    </main>
+
+    <script>
+        // ==================== AUDIO ENGINE (MECHANICAL KEYBOARD) ====================
+        class AudioEngine {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+                this.initialized = false;
+                this.noiseBuffer = null;
+            }
+
+            init() {
+                if (this.initialized) return;
+                
+                try {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    this.createNoiseBuffer();
+                    this.initialized = true;
+                } catch(e) {
+                    console.error('Audio init failed:', e);
+                }
+            }
+
+            createNoiseBuffer() {
+                if (!this.ctx) return;
+                const bufferSize = this.ctx.sampleRate * 0.1;
+                this.noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const output = this.noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+            }
+
+            playKeySound() {
+                if (!this.enabled || !this.ctx) return;
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+
+                const now = this.ctx.currentTime;
+                
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                const filter = this.ctx.createBiquadFilter();
+
+                const baseFreq = 130 + (Math.random() * 40 - 20);
+                
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(baseFreq, now);
+                osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.5, now + 0.03);
+                
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2000, now);
+                filter.Q.value = 0.7;
+
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.03, now + 0.003);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.04);
+
+                if (this.noiseBuffer) {
+                    const noise = this.ctx.createBufferSource();
+                    noise.buffer = this.noiseBuffer;
+                    const noiseGain = this.ctx.createGain();
+                    const noiseFilter = this.ctx.createBiquadFilter();
+                    
+                    noiseFilter.type = 'highpass';
+                    noiseFilter.frequency.setValueAtTime(800, now);
+                    
+                    noiseGain.gain.setValueAtTime(0.006, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+                    
+                    noise.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
+                    noiseGain.connect(this.ctx.destination);
+                    noise.start(now);
+                }
+
+                const osc2 = this.ctx.createOscillator();
+                const gain2 = this.ctx.createGain();
+                
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(80, now);
+                osc2.frequency.exponentialRampToValueAtTime(50, now + 0.02);
+                
+                gain2.gain.setValueAtTime(0.015, now);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+                
+                osc2.connect(gain2);
+                gain2.connect(this.ctx.destination);
+                
+                osc2.start(now);
+                osc2.stop(now + 0.03);
+            }
+
+            playBackspaceSound() {
+                if (!this.enabled || !this.ctx) return;
+                
+                const now = this.ctx.currentTime;
+                
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                const filter = this.ctx.createBiquadFilter();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
+                
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(1200, now);
+                
+                gain.gain.setValueAtTime(0.035, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.05);
+
+                if (this.noiseBuffer) {
+                    const noise = this.ctx.createBufferSource();
+                    noise.buffer = this.noiseBuffer;
+                    const noiseGain = this.ctx.createGain();
+                    const noiseFilter = this.ctx.createBiquadFilter();
+                    
+                    noiseFilter.type = 'bandpass';
+                    noiseFilter.frequency.setValueAtTime(600, now);
+                    noiseFilter.Q.value = 1;
+                    
+                    noiseGain.gain.setValueAtTime(0.008, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+                    
+                    noise.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
+                    noiseGain.connect(this.ctx.destination);
+                    noise.start(now);
+                }
+
+                const osc2 = this.ctx.createOscillator();
+                const gain2 = this.ctx.createGain();
+                
+                osc2.type = 'sine';
+                osc2.frequency.setValueAtTime(100, now);
+                osc2.frequency.exponentialRampToValueAtTime(60, now + 0.03);
+                
+                gain2.gain.setValueAtTime(0.02, now);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+                
+                osc2.connect(gain2);
+                gain2.connect(this.ctx.destination);
+                
+                osc2.start(now);
+                osc2.stop(now + 0.04);
+            }
+
+            toggle() {
+                this.enabled = !this.enabled;
+            }
+        }
+
+        // ==================== TYPEWRITER ENGINE ====================
+        class Typewriter {
+            constructor(audio) {
+                this.audio = audio;
+                this.typeSpeed = 45;
+                this.backspaceSpeed = 25;
+                this.numberSpeed = 50;
+                this.cursorElement = null;
+                this.isWriting = false;
+            }
+
+            createCursor() {
+                if (this.cursorElement) {
+                    this.cursorElement.remove();
+                }
+                this.cursorElement = document.createElement('span');
+                this.cursorElement.className = 'cursor';
+                return this.cursorElement;
+            }
+
+            removeCursor() {
+                if (this.cursorElement) {
+                    this.cursorElement.remove();
+                    this.cursorElement = null;
+                }
+            }
+
+            async type(element, text, addCursor = false) {
+                this.audio.init();
+                this.isWriting = true;
+                element.innerHTML = '';
+                
+                if (addCursor) {
+                    const cursor = this.createCursor();
+                    element.appendChild(cursor);
+                }
+
+                for (let i = 0; i < text.length; i++) {
+                    if (addCursor) {
+                        element.textContent = text.substring(0, i + 1);
+                        element.appendChild(this.cursorElement);
+                    } else {
+                        element.textContent += text[i];
+                    }
+                    if (text[i] !== ' ') this.audio.playKeySound();
+                    await this.wait(this.typeSpeed);
+                }
+
+                this.isWriting = false;
+                if (!addCursor) {
+                    await this.wait(0);
+                }
+            }
+
+            async typeNumber(element, number, addCursor = false) {
+                this.audio.init();
+                this.isWriting = true;
+                element.innerHTML = '';
+                const numStr = number.toString();
+                
+                if (addCursor) {
+                    const cursor = this.createCursor();
+                    element.appendChild(cursor);
+                }
+
+                for (let i = 0; i < numStr.length; i++) {
+                    if (addCursor) {
+                        element.textContent = numStr.substring(0, i + 1);
+                        element.appendChild(this.cursorElement);
+                    } else {
+                        element.textContent += numStr[i];
+                    }
+                    this.audio.playKeySound();
+                    await this.wait(this.numberSpeed);
+                }
+
+                this.isWriting = false;
+                if (!addCursor) {
+                    const indicator = document.createElement('span');
+                    indicator.className = 'live-indicator';
+                    element.appendChild(indicator);
+                    await this.wait(200);
+                }
+                this.removeCursor();
+            }
+
+            async backspace(element) {
+                this.isWriting = true;
+                const text = element.textContent;
+                const indicator = element.querySelector('.live-indicator');
+                if (indicator) indicator.remove();
+                
+                for (let i = text.length; i >= 0; i--) {
+                    element.textContent = text.substring(0, i);
+                    if (this.cursorElement) {
+                        element.appendChild(this.cursorElement);
+                    }
+                    if (i > 0 && text[i - 1] !== ' ') this.audio.playBackspaceSound();
+                    await this.wait(this.backspaceSpeed);
+                }
+                element.innerHTML = '';
+                this.isWriting = false;
+            }
+
+            async wait(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // ==================== COUNTER ENGINE ====================
+        class CounterEngine {
+            constructor() {
+                this.basePopulation = 8100000000;
+                this.birthsPerDay = 385000;
+                this.deathsPerDay = 165000;
+                this.startTime = Date.now();
+                this.midnight = new Date();
+                this.midnight.setHours(0, 0, 0, 0);
+                this.seed = Math.random() * 1000000;
+            }
+
+            getSecondsSinceMidnight() {
+                return Math.floor((new Date() - this.midnight) / 1000);
+            }
+
+            getPopulation() {
+                const variation = Math.floor(this.seed % 50000000);
+                const seconds = this.getSecondsSinceMidnight();
+                return this.basePopulation + variation + Math.floor(seconds * 2.5);
+            }
+
+            getBirthsToday() {
+                const variation = Math.floor(this.seed % 50000);
+                const seconds = this.getSecondsSinceMidnight();
+                return Math.floor(variation + (seconds * this.birthsPerDay / 86400));
+            }
+
+            getDeathsToday() {
+                const variation = Math.floor(this.seed % 30000);
+                const seconds = this.getSecondsSinceMidnight();
+                return Math.floor(variation + (seconds * this.deathsPerDay / 86400));
+            }
+
+            getLostSeconds() {
+                return Math.floor((Date.now() - this.startTime) / 1000);
+            }
+
+            format(num) {
+                return new Intl.NumberFormat('en-US').format(num);
+            }
+
+            updateLive(typewriter) {
+                if (typewriter.isWriting) return;
+
+                const v1 = document.getElementById('value1');
+                const v4 = document.getElementById('value4');
+                if (v1 && v1.textContent && !v1.querySelector('.live-indicator')) {
+                    v1.textContent = this.format(this.getPopulation());
+                }
+                if (v4 && v4.textContent && !v4.querySelector('.live-indicator')) {
+                    v4.textContent = this.format(this.getLostSeconds());
+                }
+            }
+        }
+
+        // ==================== CONTENT MANAGER (5 LANGUAGES) ====================
+        class ContentManager {
+            constructor(typewriter, counter) {
+                this.typewriter = typewriter;
+                this.counter = counter;
+                this.currentLang = 0;
+                this.isRunning = false;
+
+                this.content = {
+                    tr: {
+                        line1: 'UYAN!',
+                        line2: 'Sen hala adaylar arasında karar vermek için',
+                        line3: 'vakit kaybederken',
+                        line4: 'VAKİT KAYBETME!',
+                        line5: 'Zaman sandığından hızlı akıyor...',
+                        line6: 'Bu beyaz sayfayı birlikte dolduralım. "Erdinc"',
+                        labels: ['DÜNYA NÜFUSU', 'BUGÜN DOĞANLAR', 'BUGÜN ÖLENLER', 'KAYBEDİLEN SANİYE']
+                    },
+                    en: {
+                        line1: 'WAKE UP!',
+                        line2: 'While you are still wasting time deciding',
+                        line3: 'between candidates',
+                        line4: 'DON\'T WASTE TIME!',
+                        line5: 'Time flows faster than you think...',
+                        line6: 'Let\'s fill this white page together."Erdinc"',
+                        labels: ['WORLD POPULATION', 'BORN TODAY', 'DIED TODAY', 'SECONDS LOST']
+                    },
+                    de: {
+                        line1: 'AUFWAREN!',
+                        line2: 'Während du noch Zeit verlierst',
+                        line3: 'zwischen Kandidaten zu entscheiden',
+                        line4: 'VERSCHWENDE KEINE ZEIT!',
+                        line5: 'Die Zeit vergeht schneller als du denkst...',
+                        line6: 'Lass uns diese weiße Seite gemeinsam füllen. "Erdinc"',
+                        labels: ['WELTBEVÖLKERUNG', 'HEUTE GEBOREN', 'HEUTE GESTORBEN', 'VERLORENE SEKUNDEN']
+                    },
+                    es: {
+                        line1: '¡DESPIERTA!',
+                        line2: 'Mientras aún pierdes tiempo decidiendo',
+                        line3: 'entre candidatos',
+                        line4: '¡NO PIERDAS TIEMPO!',
+                        line5: 'El tiempo fluye más rápido de lo que piensas...',
+                        line6: 'Llenemos esta página blanca juntos. "Erdinc"',
+                        labels: ['POBLACIÓN MUNDIAL', 'NACIDOS HOY', 'MUERTOS HOY', 'SEGUNDOS PERDIDOS']
+                    },
+                    cn: {
+                        line1: '唤醒!',
+                        line2: '当你还在候选人之间犹豫不决时',
+                        line3: '浪费时间',
+                        line4: '不要浪费时间!',
+                        line5: '时间比你想象的流逝得更快...',
+                        line6: '让我们一起填满这页白纸.',
+                        labels: ['世界人口', '今日出生', '今日死亡', '失去的秒数']
+                    }
+                };
+            }
+
+            async run() {
+                if (this.isRunning) return;
+                this.isRunning = true;
+
+                while (true) {
+                    const lang = this.currentLang === 0 ? 'tr' : 
+                                 this.currentLang === 1 ? 'en' :
+                                 this.currentLang === 2 ? 'de' :
+                                 this.currentLang === 3 ? 'es' : 'cn';
+                    const data = this.content[lang];
+
+                    await this.typewriter.type(document.getElementById('line1'), data.line1, true);
+                    await this.typewriter.wait(200);
+                    
+                    await this.typewriter.type(document.getElementById('line2'), data.line2, true);
+                    await this.typewriter.wait(200);
+                    
+                    await this.typewriter.type(document.getElementById('line3'), data.line3, true);
+                    await this.typewriter.wait(600);
+
+                    await this.typewriter.type(document.getElementById('label1'), data.labels[0], true);
+                    await this.typewriter.wait(150);
+                    await this.typewriter.typeNumber(document.getElementById('value1'), this.counter.format(this.counter.getPopulation()), false);
+                    await this.typewriter.wait(150);
+                    
+                    await this.typewriter.type(document.getElementById('label2'), data.labels[1], true);
+                    await this.typewriter.wait(150);
+                    await this.typewriter.typeNumber(document.getElementById('value2'), this.counter.format(this.counter.getBirthsToday()), false);
+                    await this.typewriter.wait(150);
+                    
+                    await this.typewriter.type(document.getElementById('label3'), data.labels[2], true);
+                    await this.typewriter.wait(150);
+                    await this.typewriter.typeNumber(document.getElementById('value3'), this.counter.format(this.counter.getDeathsToday()), false);
+                    await this.typewriter.wait(150);
+                    
+                    await this.typewriter.type(document.getElementById('label4'), data.labels[3], true);
+                    await this.typewriter.wait(150);
+                    await this.typewriter.typeNumber(document.getElementById('value4'), this.counter.format(this.counter.getLostSeconds()), false);
+                    
+                    await this.typewriter.wait(1000);
+
+                    await this.typewriter.type(document.getElementById('line4'), data.line4, true);
+                    await this.typewriter.wait(200);
+                    await this.typewriter.type(document.getElementById('line5'), data.line5, true);
+                    await this.typewriter.wait(200);
+                    await this.typewriter.type(document.getElementById('line6'), data.line6, true);
+                    await this.typewriter.wait(1500);
+
+                    await this.typewriter.backspace(document.getElementById('line6'));
+                    await this.typewriter.backspace(document.getElementById('line5'));
+                    await this.typewriter.backspace(document.getElementById('line4'));
+                    await this.typewriter.wait(200);
+
+                    await this.typewriter.backspace(document.getElementById('value4'));
+                    await this.typewriter.backspace(document.getElementById('label4'));
+                    await this.typewriter.wait(80);
+                    await this.typewriter.backspace(document.getElementById('value3'));
+                    await this.typewriter.backspace(document.getElementById('label3'));
+                    await this.typewriter.wait(80);
+                    await this.typewriter.backspace(document.getElementById('value2'));
+                    await this.typewriter.backspace(document.getElementById('label2'));
+                    await this.typewriter.wait(80);
+                    await this.typewriter.backspace(document.getElementById('value1'));
+                    await this.typewriter.backspace(document.getElementById('label1'));
+                    await this.typewriter.wait(150);
+
+                    await this.typewriter.backspace(document.getElementById('line3'));
+                    await this.typewriter.backspace(document.getElementById('line2'));
+                    await this.typewriter.backspace(document.getElementById('line1'));
+
+                    this.currentLang = (this.currentLang + 1) % 5;
+                }
+            }
+        }
+
+        // ==================== GLOBAL FUNCTIONS ====================
+        const audio = new AudioEngine();
+        const typewriter = new Typewriter(audio);
+        const counter = new CounterEngine();
+        const content = new ContentManager(typewriter, counter);
+
+        function startApp() {
+            const loader = document.getElementById('loader');
+            if (loader.classList.contains('hidden')) return;
+            
+            audio.init();
+            if (audio.ctx && audio.ctx.state === 'suspended') {
+                audio.ctx.resume();
+            }
+            
+            loader.classList.add('hidden');
+            
+            setInterval(() => counter.updateLive(typewriter), 1000);
+            
+            content.run();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'm' || e.key === 'M') audio.toggle();
+        });
+
+        // ✅ MOBİL: Orientation change'de font yeniden hesapla
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Visual viewport API ile keyboard kontrolü
+                if (window.visualViewport) {
+                    const keyboardOpen = window.visualViewport.height < window.innerHeight * 0.8;
+                    if (keyboardOpen) {
+                        document.body.style.paddingBottom = '20px';
+                    } else {
+                        document.body.style.paddingBottom = '0';
+                    }
+                }
+            }, 200);
+        });
+    </script>
+</body>
+</html>
