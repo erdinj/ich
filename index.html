@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="INC VOLT | Future Studio – Dijital Medya Yöneticisi"/>
+<title>INC VOLT | Future Studio</title>
+<!-- 🎬 FAVICON -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23C8B6FF' width='100' height='100' rx='15'/><path fill='%231a1a1a' d='M20 35 L35 20 L50 35 L65 20 L80 35 L80 75 L20 75 Z'/><rect fill='%23FFE156' x='25' y='40' width='50' height='30' rx='3'/><text x='50' y='60' font-size='20' font-weight='bold' text-anchor='middle' fill='%231a1a1a'>KV</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23C8B6FF' width='100' height='100' rx='15'/><path fill='%231a1a1a' d='M20 35 L35 20 L50 35 L65 20 L80 35 L80 75 L20 75 Z'/><rect fill='%23FFE156' x='25' y='40' width='50' height='30' rx='3'/><text x='50' y='60' font-size='20' font-weight='bold' text-anchor='middle' fill='%231a1a1a'>KV</text></svg>">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<!-- Tailwind Config -->
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'retro-pink': '#FFE5E5',
+'retro-purple': '#C8B6FF',
+'retro-yellow': '#FFE156',
+'retro-cyan': '#7DD3FC',
+'retro-blue': '#93C5FD',
+'retro-black': '#1a1a1a',
+'retro-white': '#FFFFFF',
+'retro-peach': '#FFD4C4'
+},
+fontFamily: {
+'fredoka': ['Fredoka', 'sans-serif'],
+'pacifico': ['Pacifico', 'cursive'],
+'nunito': ['Nunito', 'sans-serif']
+},
+animation: {
+'bounce-slow': 'bounce 3s infinite',
+'wiggle': 'wiggle 2s ease-in-out infinite',
+'spin-slow': 'spin 8s linear infinite',
+'float': 'float 4s ease-in-out infinite',
+'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+},
+keyframes: {
+wiggle: {
+'0%, 100%': { transform: 'rotate(-3deg)' },
+'50%': { transform: 'rotate(3deg)' },
+},
+float: {
+'0%, 100%': { transform: 'translateY(0)' },
+'50%': { transform: 'translateY(-15px)' },
+}
+}
+}
+}
+}
+</script>
+<!-- Custom CSS -->
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Nunito', sans-serif;
+background: linear-gradient(135deg, #FFE5E5 0%, #C8B6FF 100%);
+color: #1a1a1a;
+overflow-x: hidden;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.browser-window {
+background: white;
+border-radius: 12px;
+box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+overflow: visible;
+margin: 20px auto;
+max-width: 1400px;
+}
+.browser-header {
+background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);
+border-bottom: 2px solid #ddd;
+padding: 12px 16px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.browser-btn {
+width: 12px;
+height: 12px;
+border-radius: 50%;
+}
+.browser-btn.red { background: #FF5F57; }
+.browser-btn.yellow { background: #FFBD2E; }
+.browser-btn.green { background: #28CA41; }
+.nav-link {
+font-family: 'Fredoka', sans-serif;
+transition: all 0.3s;
+position: relative;
+}
+.nav-link:hover {
+color: #C8B6FF;
+transform: translateY(-2px);
+}
+.nav-link::after {
+content: '★';
+position: absolute;
+bottom: -8px;
+left: 50%;
+transform: translateX(-50%);
+opacity: 0;
+transition: opacity 0.3s;
+color: #FFE156;
+}
+.nav-link:hover::after {
+opacity: 1;
+}
+.smiley {
+font-size: 4rem;
+animation: wiggle 2s ease-in-out infinite;
+display: inline-block;
+}
+.star {
+color: #FFE156;
+animation: spin-slow 4s linear infinite;
+}
+.lightning {
+color: #FFE156;
+font-size: 2rem;
+animation: pulse-fast 1.5s infinite;
+}
+.main-title {
+font-family: 'Fredoka', sans-serif;
+text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+line-height: 1;
+}
+.title-yellow {
+color: #FFBD2E;
+-webkit-text-stroke: 2px #1a1a1a;
+text-shadow: 3px 3px 0 #1a1a1a;
+font-family: 'Pacifico', cursive;
+}
+.title-cyan {
+color: #7DD3FC;
+-webkit-text-stroke: 2px #1a1a1a;
+text-shadow: 3px 3px 0 #1a1a1a;
+}
+.pill-button {
+background: white;
+border: 3px solid #1a1a1a;
+border-radius: 50px;
+padding: 10px 30px;
+font-family: 'Fredoka', sans-serif;
+font-weight: bold;
+display: inline-block;
+box-shadow: 4px 4px 0 #1a1a1a;
+transition: all 0.2s;
+}
+.pill-button:hover {
+transform: translate(2px, 2px);
+box-shadow: 2px 2px 0 #1a1a1a;
+}
+.date-badge {
+background: #1a1a1a;
+color: white;
+border-radius: 50%;
+width: 100px;
+height: 100px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-family: 'Fredoka', sans-serif;
+transform: rotate(-10deg);
+box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+.date-badge .day {
+font-size: 2.5rem;
+line-height: 1;
+}
+.date-badge .month {
+font-size: 0.7rem;
+text-transform: uppercase;
+}
+.tonight-badge {
+background: #FF5F57;
+color: white;
+padding: 8px 25px;
+border-radius: 50px;
+font-family: 'Fredoka', sans-serif;
+transform: rotate(15deg);
+display: inline-block;
+box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+.retro-card {
+background: white;
+border: 3px solid #1a1a1a;
+border-radius: 20px;
+box-shadow: 6px 6px 0 #1a1a1a;
+transition: all 0.3s;
+overflow: visible;
+}
+.retro-card:hover {
+transform: translate(-3px, -3px);
+box-shadow: 9px 9px 0 #1a1a1a;
+}
+.category-block {
+background: linear-gradient(135deg, #FFE5E5 0%, #FFD4C4 100%);
+border: 3px solid #1a1a1a;
+border-radius: 16px;
+padding: 1.5rem;
+margin-bottom: 1.5rem;
+box-shadow: 4px 4px 0 #1a1a1a;
+}
+.category-title {
+font-family: 'Fredoka', sans-serif;
+color: #1a1a1a;
+display: flex;
+align-items: center;
+gap: 0.8rem;
+margin-bottom: 1rem;
+font-size: 1.2rem;
+}
+.category-icon {
+width: 40px;
+height: 40px;
+background: #FFE156;
+border: 2px solid #1a1a1a;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.3rem;
+}
+.skill-item {
+display: flex;
+align-items: flex-start;
+gap: 0.8rem;
+padding: 0.8rem 0;
+border-bottom: 2px dashed rgba(0,0,0,0.1);
+}
+.skill-item:last-child { border-bottom: none; }
+.skill-icon {
+width: 32px;
+height: 32px;
+background: #C8B6FF;
+border: 2px solid #1a1a1a;
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+font-size: 0.9rem;
+}
+.skill-name {
+font-weight: 800;
+color: #1a1a1a;
+margin-bottom: 0.2rem;
+}
+.skill-desc {
+font-size: 0.85rem;
+color: #555;
+}
+.project-card {
+background: white;
+border: 3px solid #1a1a1a;
+border-radius: 20px;
+overflow: hidden;
+box-shadow: 6px 6px 0 #1a1a1a;
+transition: all 0.3s;
+cursor: pointer;
+}
+.project-card:hover {
+transform: translate(-4px, -4px) rotate(1deg);
+box-shadow: 10px 10px 0 #C8B6FF;
+}
+.project-header {
+background: linear-gradient(135deg, #FFE156 0%, #FFD4C4 100%);
+padding: 1.5rem;
+border-bottom: 3px solid #1a1a1a;
+}
+.project-icon {
+width: 60px;
+height: 60px;
+background: #1a1a1a;
+border-radius: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.8rem;
+color: white;
+border: 3px solid white;
+box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+.project-title {
+font-family: 'Fredoka', sans-serif;
+font-size: 1.3rem;
+color: #1a1a1a;
+}
+.project-hook {
+color: #666;
+font-style: italic;
+font-size: 0.9rem;
+}
+.project-body {
+padding: 1.5rem;
+}
+.project-tag {
+background: #C8B6FF;
+border: 2px solid #1a1a1a;
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 700;
+display: inline-block;
+margin-right: 6px;
+margin-bottom: 6px;
+}
+.video-card {
+background: white;
+border: 3px solid #1a1a1a;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 5px 5px 0 #1a1a1a;
+transition: all 0.3s;
+}
+.video-card:hover {
+transform: translateY(-5px) rotate(1deg);
+box-shadow: 8px 8px 0 #FFE156;
+}
+.video-thumb {
+position: relative;
+aspect-ratio: 16/9;
+background: #FFE5E5;
+display: block;
+cursor: pointer;
+}
+.video-thumb img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.video-play {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(0,0,0,0.3);
+}
+.video-play i {
+width: 60px;
+height: 60px;
+background: #FF5F57;
+border: 3px solid white;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 1.5rem;
+box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+#chat-toggle {
+background: #FF5F57;
+border: 3px solid #1a1a1a;
+box-shadow: 4px 4px 0 #1a1a1a;
+animation: bounce-slow 2s infinite;
+}
+#chat-window {
+background: white;
+border: 3px solid #1a1a1a;
+border-radius: 20px;
+box-shadow: 8px 8px 0 #1a1a1a;
+}
+
+/* CHATBOT MOBİL DÜZENLEMESİ */
+@media (max-width: 768px) {
+    #chat-window {
+        width: 95vw !important;
+        max-width: 360px !important;
+        max-height: 55vh !important;
+        bottom: 85px !important;
+        right: 2.5vw !important;
+    }
+    #chat-messages {
+        max-height: 28vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.chat-header {
+background: linear-gradient(135deg, #C8B6FF 0%, #FFE156 100%);
+border-bottom: 3px solid #1a1a1a;
+}
+.quick-questions {
+padding: 10px;
+border-top: 3px solid #1a1a1a;
+border-bottom: 3px solid #1a1a1a;
+background: #FFE5E5;
+overflow-x: auto;
+white-space: nowrap;
+scrollbar-width: none;
+}
+.quick-questions::-webkit-scrollbar {
+display: none;
+}
+.quick-btn {
+display: inline-block;
+padding: 8px 16px;
+margin-right: 8px;
+background: white;
+border: 2px solid #1a1a1a;
+border-radius: 20px;
+font-weight: 700;
+font-size: 0.85rem;
+cursor: pointer;
+transition: all 0.2s;
+white-space: nowrap;
+font-family: 'Fredoka', sans-serif;
+}
+.quick-btn:hover {
+background: #FFE156;
+transform: translateY(-2px);
+}
+.message.bot {
+background: #FFE5E5;
+border: 2px solid #1a1a1a;
+border-radius: 16px 16px 16px 4px;
+}
+.message.user {
+background: #C8B6FF;
+border: 2px solid #1a1a1a;
+border-radius: 16px 16px 4px 16px;
+}
+
+/* TYPING INDICATOR - YENİ EKLENEN */
+.typing-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px;
+    background: #FFE5E5;
+    border: 2px solid #1a1a1a;
+    border-radius: 16px 16px 16px 4px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 3px;
+    margin-left: 8px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+    0%, 80%, 100% { 
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    40% { 
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+}
+
+.btn-retro {
+background: #FFE156;
+border: 3px solid #1a1a1a;
+border-radius: 50px;
+padding: 12px 30px;
+font-family: 'Fredoka', sans-serif;
+font-weight: bold;
+box-shadow: 4px 4px 0 #1a1a1a;
+transition: all 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+.btn-retro:hover {
+transform: translate(2px, 2px);
+box-shadow: 2px 2px 0 #1a1a1a;
+background: #FFD4C4;
+}
+.btn-retro-secondary {
+background: #C8B6FF;
+border: 3px solid #1a1a1a;
+border-radius: 50px;
+padding: 12px 30px;
+font-family: 'Fredoka', sans-serif;
+font-weight: bold;
+box-shadow: 4px 4px 0 #1a1a1a;
+transition: all 0.2s;
+}
+.btn-retro-secondary:hover {
+transform: translate(2px, 2px);
+box-shadow: 2px 2px 0 #1a1a1a;
+background: #7DD3FC;
+}
+.social-sidebar {
+position: fixed;
+left: 20px;
+top: 50%;
+transform: translateY(-50%);
+background: #1a1a1a;
+border-radius: 12px;
+padding: 15px 10px;
+display: flex;
+flex-direction: column;
+gap: 12px;
+z-index: 50;
+box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+.social-sidebar a {
+color: white;
+font-size: 1.3rem;
+transition: all 0.3s;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 8px;
+}
+.social-sidebar a:hover {
+background: #FFE156;
+color: #1a1a1a;
+transform: scale(1.1);
+}
+.sticky-wrapper {
+position: relative;
+min-height: 600px;
+}
+.sticky-image-container {
+position: sticky;
+top: 120px;
+z-index: 10;
+}
+@media (max-width: 768px) {
+.social-sidebar { display: none; }
+.sticky-image-container { position: relative; top: auto; }
+.sticky-wrapper { min-height: auto; }
+}
+</style>
+</head>
+<body>
+<!-- Social Sidebar -->
+<div class="social-sidebar hidden md:flex">
+<a href="#" title="Home"><i class="fas fa-home"></i></a>
+<a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
+<!-- Browser Window -->
+<div class="browser-window min-h-screen">
+<!-- Browser Header -->
+<div class="browser-header">
+<div class="browser-btn red"></div>
+<div class="browser-btn yellow"></div>
+<div class="browser-btn green"></div>
+</div>
+<!-- Navigation -->
+<nav class="bg-white border-b-4 border-black px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<a href="#" class="flex items-center gap-3">
+<div class="w-12 h-12 bg-gradient-to-br from-retro-cyan to-retro-purple rounded-xl border-3 border-black flex items-center justify-center font-fredoka text-2xl shadow-[4px_4px_0_#1a1a1a]">
+ƎE
+</div>
+<span class="font-fredoka text-2xl hidden sm:block">INC<span class="text-retro-purple">.STUDIO</span></span>
+</a>
+<div class="hidden md:flex items-center gap-6 font-fredoka text-lg">
+<a href="#hero" class="nav-link">ANA SAYFA</a>
+<a href="#about" class="nav-link">HAKKIMDA</a>
+<a href="#projects" class="nav-link">PROJELER</a>
+<a href="#gallery" class="nav-link">GALERİ</a>
+</div>
+<button class="md:hidden text-3xl" id="mobile-menu-btn">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-retro-pink z-50 hidden flex-col items-center justify-center gap-6 p-8">
+<button id="mobile-menu-close" class="absolute top-6 right-6 text-4xl">
+<i class="fas fa-times"></i>
+</button>
+<a href="#hero" class="font-fredoka text-3xl hover:text-retro-purple">ANA SAYFA</a>
+<a href="#about" class="font-fredoka text-3xl hover:text-retro-purple">HAKKIMDA</a>
+<a href="#projects" class="font-fredoka text-3xl hover:text-retro-purple">PROJELER</a>
+<a href="#gallery" class="font-fredoka text-3xl hover:text-retro-purple">GALERİ</a>
+</div>
+<!-- HERO SECTION -->
+<section id="hero" class="bg-retro-pink relative overflow-hidden px-6 py-16 md:py-24">
+<div class="absolute top-20 right-20 text-5xl animate-wiggle">✦</div>
+<div class="absolute bottom-20 left-20 lightning">⚡</div>
+<div class="absolute bottom-10 right-10 text-4xl animate-bounce-slow">✧</div>
+<div class="max-w-7xl mx-auto">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="text-center md:text-left">
+<h1 class="main-title text-5xl md:text-7xl mb-6">
+<div class="title-yellow mb-2">Ready to</div>
+<div class="title-cyan">WORK</div>
+</h1>
+<div class="pill-button text-xl md:text-2xl mb-6 inline-block">
+PROFESSIONAL SERVICES
+</div>
+<div class="space-y-4 mb-8">
+<p class="font-bold text-xl">8 AM till 6 PM</p>
+<p class="text-gray-700 max-w-md mx-auto md:mx-0" style="font-weight: 800;">
+Dijital medya yönetimi, video prodüksiyonu ve kreatif içerik çözümleri ile markanızı bir üst seviyeye taşıyorum.
+</p>
+</div>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" class="btn-retro text-lg">
+<i class="fas fa-play-circle"></i> PROJELERİMİ GÖR
+</button>
+<button onclick="toggleChat()" class="btn-retro-secondary text-lg">
+<i class="fas fa-robot"></i> INC BOT İLE KONUŞ
+</button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute inset-0 bg-retro-purple rounded-3xl transform rotate-3 border-4 border-black"></div>
+<div class="relative bg-white rounded-3xl border-4 border-black p-6 shadow-[8px_8px_0_#1a1a1a]">
+<div class="aspect-square bg-gradient-to-br from-retro-peach to-retro-cyan rounded-2xl flex items-center justify-center border-3 border-black overflow-hidden">
+<img src="https://cdn.sanity.io/images/mdvd9y9n/production/972bcf2f667ca5003cdff4a8e36f908323f02833-1792x1024.jpg?w=1792&auto=format" alt="Profile" class="w-full h-full object-cover">
+</div>
+<div class="absolute -bottom-6 -left-6 date-badge">
+<div class="day">81</div>
+<div class="month">İL</div>
+</div>
+<div class="absolute -top-4 -right-4 tonight-badge">
+LET'S TALK
+</div>
+</div>
+<div class="absolute -top-8 left-1/2 star text-4xl">✦</div>
+<div class="absolute top-1/2 -right-8 star text-3xl" style="animation-delay: 1s">✧</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ABOUT SECTION -->
+<section id="about" class="px-6 py-16 bg-white">
+<div class="max-w-6xl mx-auto">
+<div class="text-center mb-12">
+<h3 class="font-fredoka text-3xl mb-4 text-retro-cyan" style="-webkit-text-stroke: 1.5px #1a1a1a; text-shadow: 2px 2px 0 #1a1a1a;">
+Bir Yolculuğun Karesi...<br></h3>
+<p class="text-gray-600 max-w-2xl mx-auto text-lg" style="font-weight: 800; text-align: left; margin-bottom: 0; line-height: 1.2;">
+Bazı yollar haritalarda değil, kaderde çizilir. BAU İletişim Fakültesi'nden çıkan bu hikaye, University of Trás-os-Montes and Alto Douro'da renk buldu, Almanya ve Hollanda'da festivallerde nefes aldı. Hong Kong PolyU'da geleceğin teknolojisini çözdü, NYFA'da ise yönetmenlik bakışını kazandı.<br>
+<br>Hayatımın arka planında hep spor vardı. Küçükken futbol sahasında takım olmayı, büyüyünce profesyonel tenis kortlarında tek başına mücadeleyi öğrendim. Bu odaklanma, Türkiye'nin birçok ilinde organizasyon, sağlık, turizm, otomotiv, gümrükleme, tarım gibi sektörlerin hikayesini çekerken rehberim oldu. Fotoğraf ve videodan sosyal medyaya, tasarımdan AI meraklısına, drone pilotundan kurumsal iletişimciye... "Stajerlik Yöneticiliğe." Her rol, bu büyük senaryonun bir parçası.<br>
+<br>Teknoloji soğuktur ama insan sıcağı her şeyi değiştirir. Ben, sanatı, sporu ve teknolojiyi kaderin izinde birleştiren yeni nesil bir; <div class="skill-name">"Dijital Medya Yöneticisiyim". </div>
+</p>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="sticky-wrapper">
+<div class="sticky-image-container">
+<div class="retro-card p-6 animate-float">
+<img src="https://images.unsplash.com/photo-1697718363306-a02488b41f57?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Engineer Working" class="w-full rounded-xl border-3 border-black">
+</div>
+</div>
+</div>
+<div>
+<!-- Prodüksiyon & Teknik Araçlar -->
+<div class="category-block">
+<div class="category-title">
+<div class="category-icon">🔧</div>
+<span>Prodüksiyon & Teknik Araçlar</span>
+</div>
+<div class="skill-item">
+<div class="skill-icon">📹</div>
+<div>
+<div class="skill-name">Video ve Fotoğraf Prodüksiyonu</div>
+<div class="skill-desc">Konseptten çekime, ışık ve kompozisyon yönetimi.</div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-icon">🛸</div>
+<div>
+<div class="skill-name">Drone & 360° Çekim</div>
+<div class="skill-desc">Havadan perspektifler ve tam döngüsel deneyimler.</div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-icon">📼</div>
+<div>
+<div class="skill-name">Kurgu ve Montaj Takibi</div>
+<div class="skill-desc">Kurgu süreci, renk düzeltme, ses tasarımı.</div>
+</div>
+</div>
+</div>
+<!-- İçerik & Hikâye -->
+<div class="category-block" style="background: linear-gradient(135deg, #C8B6FF 0%, #FFE156 100%);">
+<div class="category-title">
+<div class="category-icon">💡</div>
+<span>İçerik & Hikâye</span>
+</div>
+<div class="skill-item">
+<div class="skill-icon">🖌️</div>
+<div>
+<div class="skill-name">Görsel Hikâye ve AI İçerik</div>
+<div class="skill-desc">AI araçları ile zenginleştirilmiş görsel anlatım.</div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-icon">📝</div>
+<div>
+<div class="skill-name">Metin & Röportaj</div>
+<div class="skill-desc">Copywriting, senaryo yazımı ve röportaj.</div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-icon">✧</div>
+<div>
+<div class="skill-name">İçerik Yönetimi</div>
+<div class="skill-desc">Versiyon kontrolü ve yayın takvimi.</div>
+</div>
+</div>
+</div>
+<!-- Sosyal Medya & Kampanya -->
+<div class="category-block" style="background: linear-gradient(135deg, #7DD3FC 0%, #FFE5E5 100%);">
+<div class="category-title">
+<div class="category-icon">📢</div>
+<span>Sosyal Medya & Kampanya</span>
+</div>
+<div class="skill-item">
+<div class="skill-icon">📟</div>
+<div>
+<div class="skill-name">Sosyal Medya Stratejisi</div>
+<div class="skill-desc">Platform bazlı içerik planlaması.</div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-icon">📈</div>
+<div>
+<div class="skill-name">Dijital Kampanya</div>
+<div class="skill-desc">Hedef kitle analizi ve performans takibi.</div>
+</div>
+</div>
+</div>
+<!-- Yönetim & Ekip -->
+<div class="category-block" style="background: linear-gradient(135deg, #FFE156 0%, #C8B6FF 100%);">
+<div class="category-title">
+<div class="category-icon">🔧</div>
+<span>Yönetim & Ekip</span>
+</div>
+<div class="skill-item">
+<div class="skill-icon">🕶️</div>
+<div>
+<div class="skill-name">Ekip Yönetimi</div>
+<div class="skill-desc">Creative ve teknik ekipler koordinasyonu.</div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-icon">📈</div>
+<div>
+<div class="skill-name">Üst Yönetim Raporlama</div>
+<div class="skill-desc">Stratejik özetler ve dashboard'lar.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PROJECTS SECTION -->
+<section id="projects" class="max-w-7xl mx-auto px-4 py-12">
+<div class="text-center mb-12">
+<h2 class="font-fredoka font-bold text-4xl text-retro-black mb-4">📂 PROJELER</h2>
+<p class="font-nunito text-retro-black text-xl" style="font-weight: 800;">
+Haritası çizildi. Her adım hazır. Sizi bekliyor. ✧
+</p>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<!-- Project 1 -->
+<div class="bg-retro-purple retro-border rounded-xl p-6 retro-btn cursor-pointer" onclick="openProjectModal('medical')">
+<div class="text-4xl mb-4">📼</div>
+<h3 class="font-fredoka font-bold text-retro-black text-xl mb-2">Müzesiz Zaman</h3>
+<p class="font-nunito text-retro-black text-sm mb-3 italic">"Bir fotoğraf hayatı ne kadar değiştirebilir?"</p>
+<p class="font-nunito text-retro-black text-sm mb-4">Mutlu geçen bir tatil fotoğrafı artık duvarlarda değil, dijital bir müzede. </p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#dijitalanilar</span>
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#konukdeneyimi</span>
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#curatedmoments</span>
+</div>
+<div class="bg-retro-pink rounded-lg p-3">
+<p class="font-nunito text-retro-black text-xs">🔒 Projenin bütün ayakları hazır. Haritası çizildi. Sizi bekliyor.</p>
+</div>
+<button class="w-full mt-4 bg-retro-yellow retro-border py-2 rounded-lg font-fredoka font-bold text-retro-black">
+Detayları Gör
+</button>
+</div>
+<!-- Project 2 -->
+<div class="bg-retro-yellow retro-border rounded-xl p-6 retro-btn cursor-pointer" onclick="openProjectModal('education')">
+<div class="text-4xl mb-4">💾</div>
+<h3 class="font-fredoka font-bold text-retro-black text-xl mb-2">1 Bölüm 1 Problem : DNC101</h3>
+<p class="font-nunito text-retro-black text-sm mb-3 italic">"Üniversiteler gerçek problemleri çözebilir mi?"</p>
+<p class="font-nunito text-retro-black text-sm mb-4">Her üniversite bölümü kendi alanında çözüm yolları üretiyor.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#üniversite</span>
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#educationinnovation</span>
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#problemçözme</span>
+</div>
+<div class="bg-retro-cyan rounded-lg p-3">
+<p class="font-nunito text-retro-black text-xs">🔒 Projenin bütün ayakları hazır. Haritası çizildi. Sizi bekliyor.</p>
+</div>
+<button class="w-full mt-4 bg-retro-black text-retro-yellow retro-border py-2 rounded-lg font-fredoka font-bold">
+Detayları Gör
+</button>
+</div>
+<!-- Project 3 -->
+<div class="bg-retro-pink retro-border rounded-xl p-6 retro-btn cursor-pointer" onclick="openProjectModal('automotive')">
+<div class="text-4xl mb-4">📀</div>
+<h3 class="font-fredoka font-bold text-retro-black text-xl mb-2">İkinci El Araç Ekonomisi 2030</h3>
+<p class="font-nunito text-retro-black text-sm mb-3 italic">"Bir otomobil satıldıktan sonra ne kadar değer kaybeder?"</p>
+<p class="font-nunito text-retro-black text-sm mb-4">Otomobillerin satıştan sonraki ekonomik yolculuğu.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#otomotivsektörü</span>
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#futureofmobility</span>
+<span class="bg-retro-black text-retro-yellow px-2 py-1 rounded text-xs font-fredoka">#cardata</span>
+</div>
+<div class="bg-retro-purple rounded-lg p-3">
+<p class="font-nunito text-retro-black text-xs">🔒 Projenin bütün ayakları hazır. Haritası çizildi. Sizi bekliyor.</p>
+</div>
+<button class="w-full mt-4 bg-retro-yellow retro-border py-2 rounded-lg font-fredoka font-bold text-retro-black">
+Detayları Gör
+</button>
+</div>
+</div>
+</section>
+<!-- VIDEO GALLERY SECTION -->
+<section id="gallery" class="px-6 py-16 bg-white">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="font-fredoka text-4xl md:text-5xl mb-4">
+<span class="text-retro-cyan" style="-webkit-text-stroke: 2px #1a1a1a; text-shadow: 3px 3px 0 #1a1a1a;">VİDEO ARŞİVİ</span>
+</h2>
+</div>
+<div class="flex flex-wrap justify-center gap-4 mb-10">
+<button class="filter-btn active pill-button" data-filter="all">Tümü</button>
+<button class="filter-btn pill-button" data-filter="featured">✦ Öne Çıkanlar</button>
+<button class="filter-btn pill-button" data-filter="level3">📂 Galeri</button>
+</div>
+<div id="video-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+</div>
+</section>
+</div>
+<!-- CHATBOT -->
+<div id="chat-toggle" class="fixed bottom-6 right-6 w-16 h-16 rounded-full flex items-center justify-center text-3xl cursor-pointer z-50 border-3 border-black shadow-[4px_4px_0_#1a1a1a]" onclick="toggleChat()">
+👾
+</div>
+<div id="chat-window" class="fixed bottom-28 right-6 w-[400px] max-h-[650px] flex-col hidden z-40">
+<div class="chat-header p-4 rounded-t-2xl">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-retro-black rounded-full flex items-center justify-center text-2xl border-3 border-white">
+NEO
+</div>
+<div>
+<h4 class="font-fredoka text-xl">INC BOT</h4>
+<div class="text-sm font-bold flex items-center gap-2">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+Online • Anında Yanıt
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Messages -->
+<div class="chat-messages flex-1 p-4 overflow-y-auto bg-white" id="chat-messages" style="min-height: 250px;">
+<div class="message bot p-3 mb-3">
+Merhaba! Ben INC BOT 👾<br>Erdinc'in dijital asistanıyım. Aşağıdaki sorulardan birini seç veya kendi sorunu yaz! ⚡
+</div>
+</div>
+<!-- Quick Questions -->
+<div class="quick-questions">
+<button class="quick-btn" onclick="askQuestion('Adın?')">Adın?</button>
+<button class="quick-btn" onclick="askQuestion('Ne iş yaparsın?')">Ne iş yaparsın?</button>
+<button class="quick-btn" onclick="askQuestion('Araçların?')">Araçların?</button>
+<button class="quick-btn" onclick="askQuestion('En iyi projen?')">En iyi projen?</button>
+<button class="quick-btn" onclick="askQuestion('AI prompt?')">AI prompt?</button>
+<button class="quick-btn" onclick="askQuestion('Neden 90lar?')">Neden 90'lar?</button>
+<button class="quick-btn" onclick="askQuestion('360° içerik?')">360° içerik?</button>
+<button class="quick-btn" onclick="askQuestion('Proje süresi?')">Proje süresi?</button>
+<button class="quick-btn" onclick="askQuestion('İletişim?')">İletişim?</button>
+<button class="quick-btn" onclick="askQuestion('Tavsiyen?')">Yaklaşımın?</button>
+<button class="quick-btn" onclick="askQuestion('Maaş?')">Maaş?</button>
+<button class="quick-btn" onclick="askQuestion('Sektörler?')">Sektörler?</button>
+</div>
+<!-- Input Area -->
+<div class="p-3 border-t-3 border-black bg-retro-pink rounded-b-2xl">
+<div class="flex gap-2">
+<input type="text" id="chat-input" placeholder="Sorunu yaz..." class="flex-1 px-4 py-2 border-2 border-black rounded-full font-bold focus:outline-none focus:ring-2 focus:ring-retro-purple" autocomplete="off">
+<button id="send-btn" onclick="sendMessage()" class="w-12 h-12 bg-retro-yellow border-2 border-black rounded-full flex items-center justify-center font-bold hover:bg-retro-cyan transition-colors">
+<i class="fas fa-paper-plane"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- VIDEO RESPONSE CARD -->
+<div class="video-response-card fixed bottom-28 right-6 w-[400px] bg-white border-3 border-black rounded-2xl shadow-[8px_8px_0_#1a1a1a] hidden flex-col z-30" id="video-response-card">
+<div class="bg-retro-yellow border-b-3 border-black p-3 rounded-t-2xl flex items-center justify-between">
+<span class="font-fredoka font-bold flex items-center gap-2"><i class="fas fa-video"></i> ÖZEL YANIT</span>
+<button onclick="closeVideoResponseCard()" class="w-8 h-8 bg-retro-black text-white rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="aspect-video">
+<iframe id="video-response-frame" src="" class="w-full h-full" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+</div>
+<div class="p-3 text-sm text-gray-600 border-t-2 border-black bg-retro-pink rounded-b-2xl">
+<i class="fas fa-info-circle mr-2"></i> Sorun için hazırlanmış özel yanıt videosu. 📼
+</div>
+</div>
+<!-- PROJECT MODAL -->
+<div class="project-modal fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-50 p-4" id="project-modal">
+<div class="retro-card max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
+<button class="absolute top-4 right-4 w-10 h-10 bg-retro-black text-white rounded-full flex items-center justify-center text-xl hover:bg-retro-red transition-colors z-10" onclick="closeProjectModal()">
+<i class="fas fa-times"></i>
+</button>
+<div class="p-8 text-center">
+<div class="text-6xl mb-4" id="modal-project-icon">📼</div>
+<h3 class="font-fredoka text-3xl mb-6" id="modal-project-title">Proje Başlığı</h3>
+<div class="bg-retro-pink border-3 border-black rounded-2xl p-6 mb-6">
+<p class="text-lg leading-relaxed mb-4">
+Bu projenin <span class="font-bold text-retro-purple">tüm stratejik ayakları</span> hazır.<br>
+Konsept net, hedef kitle tanımlandı, içerik haritası çizildi.<br><br>
+<span class="font-bold text-retro-cyan">Siz hazırsanız, proje de hazır.</span><br>
+Markanızın hedeflerinize <span class="font-bold text-retro-yellow">tam uyum</span> sağlayacak şekilde özelleştirilmeye açık.<br><br>
+Detayları konuşmak için <span class="font-bold text-retro-purple">bir kahve içelim</span>. ☕
+</p>
+</div>
+<div class="bg-green-100 border-3 border-black rounded-xl p-4 mb-6 flex items-center justify-center gap-3 font-bold">
+<i class="fas fa-check-circle text-2xl text-green-600"></i>
+<span>Proje durumu: <span class="text-retro-purple">Hazır • Başlatılmayı Bekliyor</span></span>
+</div>
+<button class="btn-retro text-lg" onclick="closeProjectModal(); toggleChat();">
+<i class="fas fa-comments"></i> Hemen Görüşelim
+</button>
+</div>
+</div>
+</div>
+<!-- JAVASCRIPT -->
+<script>
+// ===== CHATBOT Q&A =====
+const chatbotQA = {
+"adın": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"adın?": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"adın ne": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"adın ne?": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"ismin": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"ismin?": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"kim": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"kim?": "Erdinc. Dijital medya yöneticisiyim. 👾✧",
+"ne iş yaparsın": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"ne iş yaparsın?": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"ne iş yapıyorsun": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"ne iş yapıyorsun?": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"işin ne": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"işin ne?": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"ne yapıyorsun": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"ne yapıyorsun?": "Video, drone, AI içerik, sosyal medya ve kampanya yönetimi. 📼🛸📟",
+"araçların": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"araçların?": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"hangi araçlar": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"hangi araçlar?": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"programlar": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"programlar?": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"kullandığın programlar": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"kullandığın programlar?": "Premiere, AFX, Midjourney, CapCut, Analytics, 12+ araç. 🖌️⚡",
+"en iyi projen": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"en iyi projen?": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"gurur duyduğun proje": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"gurur duyduğun proje?": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"favori projen": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"favori projen?": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"projen": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"projen?": "36 saatte 3 il, 3 organizasyon, Sıfır hata. ✧",
+"ai prompt": "Etkili prompt teknikleri kullanıyorum. 📝",
+"ai prompt?": "Etkili prompt teknikleri kullanıyorum. 📝",
+"prompt nasıl": "Etkili prompt teknikleri kullanıyorum. 📝",
+"prompt nasıl?": "Etkili prompt teknikleri kullanıyorum. 📝",
+"ai ile ne yapıyorsun": "Etkili prompt teknikleri kullanıyorum. 📝",
+"ai ile ne yapıyorsun?": "Etkili prompt teknikleri kullanıyorum. 📝",
+"yapay zeka": "Etkili prompt teknikleri kullanıyorum. 📝",
+"yapay zeka?": "Etkili prompt teknikleri kullanıyorum. 📝",
+"neden 90lar": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✧",
+"neden 90lar?": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✧",
+"neden 90'lar": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✧",
+"neden 90'lar?": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✧",
+"tema neden retro": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✦✧",
+"tema neden retro?": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✦✧",
+"neden bu tasarım": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✦✧",
+"neden bu tasarım?": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✦✧",
+"90lar teması": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✦✧",
+"90lar teması?": "Retro estetik, nostalji ve dikkat çekici tasarım için. ✦✧",
+"360 içerik": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 içerik?": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360° içerik": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360° içerik?": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 video": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 video?": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 nasıl": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 nasıl?": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 derece": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"360 derece?": "Tam döngüsel kamera + After Effects ile seamless loop. 🔄📼",
+"proje süresi": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"proje süresi?": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"ne kadar sürer": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"ne kadar sürer?": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"teslim süresi": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"teslim süresi?": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"süre": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"süre?": "Zaman yönetimi + ekip koordinasyonu = zamanında teslim. ⏰✧",
+"iletişim": "Hemen ara! 💬✧",
+"iletişim?": "Hemen ara! 💬✧",
+"nasıl ulaşırım": "Hemen ara! 💬✧",
+"nasıl ulaşırım?": "Hemen ara! 💬✧",
+"iletişim bilgilerin": "Hemen ara! 💬✧",
+"iletişim bilgilerin?": "Hemen ara! 💬✧",
+"ulaş": "Hemen ara! 💬✧",
+"ulaş?": "Hemen ara! 💬✧",
+"tavsiyen": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"tavsiyen?": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"önerin": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"önerin?": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"başlangıç tavsiyesi": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"başlangıç tavsiyesi?": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"tavsiye": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"tavsiye?": "İlk prensip sor. Konsept geliştir. Araçlara hakim ol. ✧",
+"maaş": "Detaylar için görüşelim! 💰",
+"maaş?": "Detaylar için görüşelim! 💰",
+"ücret": "Detaylar için görüşelim! 💰",
+"ücret?": "Detaylar için görüşelim! 💰",
+"fiyat": "Detaylar için görüşelim! 💰",
+"fiyat?": "Detaylar için görüşelim! 💰",
+"ne kadar": "Detaylar için görüşelim! 💰",
+"ne kadar?": "Detaylar için görüşelim! 💰",
+"maaşın ne kadar": "Detaylar için görüşelim! 💰",
+"maaşın ne kadar?": "Detaylar için görüşelim! 💰",
+"ne kadar maaş istiyorsun": "Detaylar için görüşelim! 💰",
+"ne kadar maaş istiyorsun?": "Detaylar için görüşelim! 💰",
+"sektörler": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"sektörler?": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"hangi sektörler": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"hangi sektörler?": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"kiminle çalışıyorsun": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"kiminle çalışıyorsun?": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"sektör": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢",
+"sektör?": "Medya, e-ticaret, sağlık, eğitim, otomotiv + daha fazlası. 🏢"
+};
+
+const FALLBACK_VIDEO = "QzJa1SAP3GM";
+const projectData = {
+medical: { icon: '📼', title: 'Müzesiz Zaman' },
+automotive: { icon: '📀', title: 'İkinci El Araç Ekonomisi 2030' },
+education: { icon: '💾', title: '1 Bölüm 1 Problem' }
+};
+
+// ===== VIDEO GALLERY DATA - DÜZELTİLMİŞ BAŞLIKLAR VE AÇIKLAMALAR =====
+const allVideos = [
+{ id: "-AKjsx3H4cI", title: "Ata'mıza Saygı", desc: "Atatürk anısına hazırlanmış özel program.", featured: true },
+{ id: "WaaN9IILTAc", title: "Sürpriz Organizasyon", desc: "Marka kimliği ve hikaye anlatımı üzerine.", featured: false },
+{ id: "A8lIUHqCtKo", title: "Haber Tanıtım", desc: "Haber bülteni tanıtım ve açılış jeneriği.", featured: true },
+{ id: "Ww1L4EP4_uk", title: "Soru & Cevap", desc: "Merak edilen sorulara samimi yanıtlar.", featured: true },
+{ id: "BPJzbQwwILc", title: "360° Marka Deneyimi", desc: "Tam döngüsel marka deneyimi sunumu.", featured: true },
+{ id: "-_sgV08ppgg", title: "Merak Edilenler", desc: "Merak edilen yeni içerikler.", featured: false },
+{ id: "6X4nnApttFw", title: "Haber Özeti", desc: "Haber highlights ve özet.", featured: false },
+{ id: "7Ah6y6DvVGY", title: "Premium Satış", desc: "Yurtdışı pazarına hazırlanan emlak tanıtımı.", featured: false },
+{ id: "wVobOEMgcTI", title: "Proje Tanıtım", desc: "Devam eden inşaat projelerinin dron ile son halleri.", featured: false },
+{ id: "hkkP-O6Zwik", title: "Eğitim Serisi", desc: "Dijital medya üzerine bilgilendirici içerik.", featured: false },
+{ id: "sMCdwLB3OB4", title: "Firma Tanıtım", desc: "Yenilenen klinik tanıtımı.", featured: false },
+{ id: "1o02wttQk7A", title: "Sosyal Medya Reels", desc: "Instagram ve TikTok için kısa format.", featured: false },
+{ id: "X43dM0V-7Fw", title: "Kurumsal Tanıtım", desc: "Şirket kültürü ve değerler tanıtımı.", featured: false },
+{ id: "B1Eg9hugB7c", title: "Before&After", desc: "90 video çekimi.", featured: false },
+{ id: "S8DkFnoL-YA", title: "Sürpriz Organizasyon", desc: "Motion graphics ve animasyon örnekleri.", featured: false },
+{ id: "8wbozPhbt_Q", title: "Özel VIP Odamız", desc: "VIP evlilik teklifi.", featured: false },
+{ id: "qVJokXEH0WA", title: "Kısa Film", desc: "Yaratıcı kısa film projesi.", featured: false },
+{ id: "H-VfGbdhm6I", title: "Özel Davet", desc: "Şirketimizin özel konukları ile söyleşi.", featured: false },
+{ id: "geEyY35nSVo", title: "Yıl Sonu", desc: "Yılın öne çıkan anlarından derleme.", featured: false },
+{ id: "Hkqk5g0xBiw", title: "Etkinlik Özeti", desc: "Etkinlik yayın kayıtları.", featured: false },
+{ id: "dSKemuWDvSQ", title: "Organizasyon", desc: "İçerik kayıtları.", featured: false },
+{ id: "QtYx-DgGIN0", title: " Stratejisi Çalıştayı", desc: "Şirket toplantısı.", featured: false },
+{ id: "leg4pjw2lrc", title: "10 Kasım", desc: "10 Kasım anma töreni.", featured: false },
+{ id: "W0WPJb-_eOY", title: "Covid-19 Önlemleri", desc: "Şirket içi farkındalık.", featured: false },
+{ id: "ASoVZ86hn7o", title: "Sosyal Sorumluluk", desc: "23 Nisan resim yarışması.", featured: false },
+{ id: "OL1Z6RcvTbo", title: "Kurulu Toplantısı", desc: "Müşteri danışmanlar kurul toplantısı.", featured: false },
+{ id: "FdhwkL9uiLg", title: "Ödül Töreni", desc: "Kıdem Plaketlerinin Takdimi", featured: false },
+{ id: "6bxt2e-GNtc", title: "Yaza Veda Partisi", desc: "Şirket içi organizasyon.", featured: false },
+{ id: "F5MdnvweIwU", title: "Montaj Videosu", desc: "Online satılan ürünün montaj tarifi", featured: false },
+{ id: "NhKZ0hrHZn8", title: "Montaj Videosu", desc: "Online satış montajı.", featured: false },
+{ id: "i9y1aR5lzN8", title: "Firma Tanıtım Film", desc: "Yenilenen videosu.", featured: false },
+{ id: "K3xesz7srmI", title: "Tanıtım", desc: "Karaman tarım tanıtım.", featured: false }
+];
+
+function shuffleArray(array) {
+const arr = [...array];
+const first = arr[0];
+const rest = arr.slice(1);
+for (let i = rest.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[rest[i], rest[j]] = [rest[j], rest[i]];
+}
+return [first, ...rest];
+}
+
+let videoGallery = shuffleArray(allVideos).map(v => ({
+...v,
+url: `https://www.youtube.com/watch?v=${v.id}`
+}));
+
+function normalizeText(text) {
+return text.toLowerCase().trim().replace(/[?.,!'"^+%&/()=]/g, '').replace(/\s+/g, ' ').replace(/'/g, '');
+}
+
+function findAnswer(question) {
+const normalized = normalizeText(question);
+if (chatbotQA[normalized]) return chatbotQA[normalized];
+for (const [key, value] of Object.entries(chatbotQA)) {
+if (normalized.includes(key) || key.includes(normalized)) return value;
+}
+return null;
+}
+
+// ===== TYPING INDICATOR FONKSİYONLARI =====
+function showTypingIndicator() {
+    const container = document.getElementById('chat-messages');
+    const typing = document.createElement('div');
+    typing.id = 'typing-indicator';
+    typing.className = 'typing-indicator';
+    typing.innerHTML = `
+        <span>INC BOT yazıyor</span>
+        <div class="typing-dots">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+    `;
+    container.appendChild(typing);
+    container.scrollTop = container.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typing = document.getElementById('typing-indicator');
+    if (typing) {
+        typing.remove();
+    }
+}
+
+function renderVideoGrid(filter = 'all') {
+const grid = document.getElementById('video-grid');
+grid.innerHTML = '';
+const filtered = videoGallery.filter(v => {
+if (filter === 'featured') return v.featured;
+if (filter === 'level3') return !v.featured;
+return true;
+});
+filtered.forEach(video => {
+const card = document.createElement('div');
+card.className = 'video-card';
+card.innerHTML = `
+<a href="${video.url}" target="_blank" class="video-thumb">
+<img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" alt="${video.title}">
+<div class="video-play"><i class="fas fa-external-link-alt"></i></div>
+</a>
+<div class="p-3">
+<div class="font-bold mb-1 truncate">${video.title}</div>
+<div class="text-sm text-gray-600 flex items-center gap-2">
+<i class="fab fa-youtube text-red-500"></i>
+<span>${video.desc}</span>
+${video.featured ? '<span class="text-retro-purple ml-auto">✦</span>' : ''}
+</div>
+</div>
+`;
+grid.appendChild(card);
+});
+}
+
+// ===== VIDEO FALLBACK FONKSİYONU =====
+function openFallbackVideo(videoId = 'QzJa1SAP3GM') {
+const videoUrl = 'https://youtu.be/' + videoId + '?si=fe27KcSGVI-3G1gu';
+const newWindow = window.open(videoUrl, '_blank', 'noopener,noreferrer');
+if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+console.log('[Chatbot] ⚠️ Popup engellendi');
+} else {
+console.log('[Chatbot] ✅ Video yeni sekmede açıldı');
+}
+}
+
+function toggleChat() {
+const chat = document.getElementById('chat-window');
+chat.classList.toggle('hidden');
+chat.classList.toggle('flex');
+if (!chat.classList.contains('hidden')) {
+document.getElementById('chat-input').focus();
+}
+}
+
+function addMessage(text, isUser = false) {
+const container = document.getElementById('chat-messages');
+const msg = document.createElement('div');
+msg.className = `message ${isUser ? 'user' : 'bot'} p-3 mb-3`;
+msg.innerHTML = text;
+container.appendChild(msg);
+container.scrollTop = container.scrollHeight;
+}
+
+function askQuestion(question) {
+document.getElementById('chat-input').value = question;
+sendMessage();
+}
+
+// ===== SENDMESSAGE - TYPING EFEKTİ İLE =====
+function sendMessage() {
+const input = document.getElementById('chat-input');
+const text = input.value.trim();
+if(!text) return;
+
+addMessage(text, true);
+input.value = '';
+
+// Typing indicator göster
+setTimeout(() => {
+showTypingIndicator();
+}, 300);
+
+setTimeout(() => {
+// Typing indicator kaldır
+removeTypingIndicator();
+
+let response = findAnswer(text);
+
+if(response) {
+addMessage(response);
+} else {
+addMessage('<div style="background:#FFE5E5; border:2px solid #1a1a1a; border-radius:12px; padding:12px; margin:8px 0;"><div style="font-weight:700; margin-bottom:8px;">🤔 Bu soruyu tam anlayamadım</div><div style="margin-bottom:10px;">Özel yanıt videosu <strong>otomatik açılıyor</strong>... 📼</div><a href="https://youtu.be/QzJa1SAP3GM?si=fe27KcSGVI-3G1gu" target="_blank" rel="noopener noreferrer" style="display:inline-block; background:#FFE156; color:#1a1a1a; padding:8px 16px; border:2px solid #1a1a1a; border-radius:8px; text-decoration:none; font-weight:700;">▶ Video Açılmazsa Buraya Tıkla</a></div>');
+setTimeout(() => { openFallbackVideo('QzJa1SAP3GM'); }, 1500);
+}
+}, 2000); // 2 saniye "yazıyor..." göster
+}
+
+function closeVideoResponseCard() {
+const card = document.getElementById('video-response-card');
+const iframe = document.getElementById('video-response-frame');
+card.classList.add('hidden');
+card.classList.remove('flex');
+iframe.src = '';
+}
+
+function openProjectModal(key) {
+const modal = document.getElementById('project-modal');
+const data = projectData[key];
+if (data) {
+document.getElementById('modal-project-icon').textContent = data.icon;
+document.getElementById('modal-project-title').textContent = data.title;
+}
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+const modal = document.getElementById('project-modal');
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+document.body.style.overflow = '';
+}
+
+document.getElementById('mobile-menu-btn').onclick = () => {
+const menu = document.getElementById('mobile-menu');
+menu.classList.remove('hidden');
+menu.classList.add('flex');
+};
+
+document.getElementById('mobile-menu-close').onclick = () => {
+const menu = document.getElementById('mobile-menu');
+menu.classList.add('hidden');
+menu.classList.remove('flex');
+};
+
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+link.onclick = () => {
+document.getElementById('mobile-menu').classList.add('hidden');
+document.getElementById('mobile-menu').classList.remove('flex');
+};
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+btn.addEventListener('click', (e) => {
+document.querySelectorAll('.filter-btn').forEach(b => {
+b.classList.remove('active');
+b.classList.add('bg-white');
+});
+e.currentTarget.classList.add('active');
+e.currentTarget.classList.remove('bg-white');
+renderVideoGrid(e.currentTarget.dataset.filter);
+});
+});
+
+document.getElementById('chat-input').addEventListener('keypress', (e) => {
+if (e.key === 'Enter') {
+e.preventDefault();
+sendMessage();
+}
+});
+
+document.getElementById('project-modal').addEventListener('click', (e) => {
+if (e.target.id === 'project-modal') closeProjectModal();
+});
+
+document.getElementById('video-response-card').addEventListener('click', (e) => {
+if (e.target.id === 'video-response-card') closeVideoResponseCard();
+});
+
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') {
+closeProjectModal();
+closeVideoResponseCard();
+const chat = document.getElementById('chat-window');
+if (!chat.classList.contains('hidden')) toggleChat();
+}
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+renderVideoGrid();
+console.log('✧ INC VOLT | Future Studio loaded');
+console.log('👾 INC BOT ready with', Object.keys(chatbotQA).length, 'Q&A pairs');
+console.log('📼 Video gallery:', videoGallery.length, 'videos');
+});
+</script>
+<!-- 🎵 RETRO KASET PLAYER -->
+<div id="kv-music-widget">
+<div class="fixed top-0 left-0 right-0 z-40 md:hidden block">
+<div class="bg-retro-purple border-b-4 border-retro-black rounded-b-xl shadow-[0px_4px_0px_0px_rgba(26,26,26,1)] flex items-center justify-between p-2">
+<div class="flex items-center gap-2 flex-1 min-w-0">
+<div class="w-6 h-6 bg-retro-black rounded border-2 border-retro-black flex items-center justify-center flex-shrink-0">
+<span class="text-xs" id="kv-tape-spinner-mobile">📼</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-fredoka font-bold text-retro-black text-xs truncate">Reklam Jingle</p>
+<div class="w-full bg-retro-black h-1 rounded-full mt-1 overflow-hidden">
+<div id="kv-progress-mobile" class="bg-retro-cyan h-full rounded-full transition-all" style="width:0%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1.5 ml-2">
+<button id="kv-play-btn-mobile" class="w-8 h-8 bg-retro-cyan text-retro-black font-fredoka font-bold rounded-full border-2 border-retro-black hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(26,26,26,1)] flex items-center justify-center text-sm">▶</button>
+</div>
+</div>
+</div>
+<div class="fixed bottom-4 left-4 z-40 hidden md:block">
+<div class="bg-retro-purple border-4 border-retro-black rounded-xl p-2.5 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] max-w-[170px]">
+<div class="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-retro-black">
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 bg-retro-black rounded-full animate-pulse"></div>
+<span class="font-fredoka font-bold text-[11px] text-retro-black">PLAYING</span>
+</div>
+<span class="font-fredoka text-[9px] bg-retro-yellow px-1.5 py-0.5 rounded border-2 border-retro-black">LIVE</span>
+</div>
+<div class="flex items-center gap-2.5 mb-2">
+<div class="w-9 h-9 bg-retro-black rounded-lg border-4 border-retro-black flex items-center justify-center relative overflow-hidden flex-shrink-0">
+<div class="absolute inset-1 bg-[repeating-linear-gradient(45deg,#1a1a1a,#1a1a1a_6px,#2a2a2a_6px,#2a2a2a_12px)] rounded"></div>
+<div class="relative z-10 text-lg" id="kv-tape-spinner">📼</div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-fredoka font-bold text-retro-black text-[11px] truncate">Reklam Jingle</p>
+<p class="font-nunito text-retro-black text-[9px] truncate opacity-70">INC Studio</p>
+<div class="w-full bg-retro-black h-1 rounded-full mt-1.5 overflow-hidden">
+<div id="kv-progress" class="bg-retro-cyan h-full rounded-full transition-all" style="width:0%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center gap-2 mb-2">
+<button id="kv-play-btn" class="w-8 h-8 bg-retro-cyan text-retro-black font-fredoka font-bold rounded-full border-2 border-retro-black hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(26,26,26,1)] flex items-center justify-center text-base">▶</button>
+</div>
+<div class="flex items-center gap-1.5 mb-2 px-1">
+<span class="text-[9px] leading-none">🔈</span>
+<input type="range" id="kv-volume" min="0" max="1" step="0.1" value="0.3" class="flex-1 h-1.5 bg-retro-black rounded-full appearance-none cursor-pointer accent-retro-cyan" style="min-width:0;max-width:100%;">
+<span class="text-[9px] leading-none">🔊</span>
+</div>
+<div id="kv-equalizer" class="hidden flex items-end justify-center gap-0.5 h-2.5 mb-2">
+<div class="w-0.5 bg-retro-cyan rounded equalizer-bar"></div>
+<div class="w-0.5 bg-retro-cyan rounded equalizer-bar"></div>
+<div class="w-0.5 bg-retro-cyan rounded equalizer-bar"></div>
+<div class="w-0.5 bg-retro-cyan rounded equalizer-bar"></div>
+</div>
+<p id="kv-status" class="text-[9px] font-nunito text-retro-black mt-1 text-center opacity-70">▶ Play</p>
+</div>
+</div>
+</div>
+<audio id="kv-audio" playsinline preload="auto">
+<source src="https://tmpfiles.org/dl/29638543/reklamjingle.mp3" type="audio/mpeg">
+</audio>
+<script>
+(function() {
+'use strict';
+const kv = {
+audio: document.getElementById('kv-audio'),
+playBtn: document.getElementById('kv-play-btn'),
+playBtnMobile: document.getElementById('kv-play-btn-mobile'),
+volume: document.getElementById('kv-volume'),
+progress: document.getElementById('kv-progress'),
+progressMobile: document.getElementById('kv-progress-mobile'),
+status: document.getElementById('kv-status'),
+tapeSpinner: document.getElementById('kv-tape-spinner'),
+tapeSpinnerMobile: document.getElementById('kv-tape-spinner-mobile'),
+equalizer: document.getElementById('kv-equalizer'),
+playing: false,
+progressTimer: null,
+unlockAttempted: false
+};
+if (!kv.audio || !kv.playBtn) { console.warn('⚠️ Music player elementleri bulunamadı'); return; }
+kv.audio.volume = parseFloat(kv.volume.value);
+kv.volume.oninput = e => { kv.audio.volume = parseFloat(e.target.value); };
+function updateProgress() {
+if(kv.audio.duration && !isNaN(kv.audio.duration)) {
+const pct = (kv.audio.currentTime / kv.audio.duration * 100) + '%';
+if(kv.progress) kv.progress.style.width = pct;
+if(kv.progressMobile) kv.progressMobile.style.width = pct;
+}
+}
+function updatePlayingState(isPlaying) {
+const icons = isPlaying ? '⏸' : '▶';
+if(kv.playBtn) kv.playBtn.textContent = icons;
+if(kv.playBtnMobile) kv.playBtnMobile.textContent = icons;
+if(kv.tapeSpinner) { isPlaying ? kv.tapeSpinner.classList.add('spinning') : kv.tapeSpinner.classList.remove('spinning'); }
+if(kv.tapeSpinnerMobile) { isPlaying ? kv.tapeSpinnerMobile.classList.add('spinning') : kv.tapeSpinnerMobile.classList.remove('spinning'); }
+if(kv.equalizer) { isPlaying ? kv.equalizer.classList.remove('hidden') : kv.equalizer.classList.add('hidden'); }
+if(kv.status) kv.status.textContent = isPlaying ? '🎵 Çalıyor...' : '⏸ Duraklatıldı';
+}
+function kvPlay() {
+if(kv.status) kv.status.textContent = '▶️ Yükleniyor...';
+const p = kv.audio.play();
+if (p !== undefined) {
+p.then(() => {
+kv.playing = true;
+updatePlayingState(true);
+kvStartProgress();
+}).catch(err => {
+if (err.name === 'NotAllowedError') {
+if(kv.status) kv.status.textContent = '🔓 Tekrar dene.';
+if (!kv.unlockAttempted) {
+kv.unlockAttempted = true;
+kv.audio.volume = 0;
+kv.audio.play().then(() => { kv.audio.pause(); kv.audio.volume = parseFloat(kv.volume.value); if(kv.status) kv.status.textContent = '✅ Hazır!'; }).catch(() => {});
+}
+} else { if(kv.status) kv.status.textContent = '❌ Hata'; if(kv.playBtn) kv.playBtn.textContent = '⚠️'; if(kv.playBtnMobile) kv.playBtnMobile.textContent = '⚠️'; }
+});
+}
+}
+function kvPause() {
+kv.audio.pause();
+kv.playing = false;
+updatePlayingState(false);
+kvStopProgress();
+}
+function kvStartProgress() { kvStopProgress(); kv.progressTimer = setInterval(updateProgress, 500); }
+function kvStopProgress() { if (kv.progressTimer) clearInterval(kv.progressTimer); }
+function handlePlayClick(e) { if(e) e.stopPropagation(); kv.playing ? kvPause() : kvPlay(); }
+if(kv.playBtn) kv.playBtn.addEventListener('click', handlePlayClick);
+if(kv.playBtnMobile) kv.playBtnMobile.addEventListener('click', handlePlayClick);
+kv.audio.addEventListener('ended', () => { kvPause(); if(kv.status) kv.status.textContent = '🎵 Bitti'; });
+kv.audio.addEventListener('timeupdate', updateProgress);
+kv.audio.addEventListener('error', (e) => { console.error('❌ Audio error:', kv.audio.error?.code, kv.audio.error?.message); if(kv.status) kv.status.textContent = '❌ Yüklenemedi'; if(kv.playBtn) kv.playBtn.textContent = '⚠️'; if(kv.playBtnMobile) kv.playBtnMobile.textContent = '⚠️'; updatePlayingState(false); });
+kv.audio.addEventListener('canplay', () => { if (!kv.unlockAttempted && kv.status) kv.status.textContent = '✅ Hazır!'; });
+kv.audio.addEventListener('loadstart', () => { if(kv.status) kv.status.textContent = '⏳ Yükleniyor...'; });
+document.addEventListener('click', function kvUnlock(e) { if (!e.target.closest('#kv-music-widget') && kv.audio.paused && !kv.unlockAttempted) { kv.unlockAttempted = true; kv.audio.volume = 0; kv.audio.play().then(() => { kv.audio.pause(); kv.audio.volume = parseFloat(kv.volume.value); }).catch(() => {}); } }, { once: true });
+})();
+</script>
+<style>
+#kv-music-widget .border-b-4 { border-bottom: 4px solid #1a1a1a; }
+#kv-music-widget .border-4 { border: 4px solid #1a1a1a; }
+#kv-music-widget .border-2 { border: 2px solid #1a1a1a; }
+#kv-music-widget .shadow-\[4px_4px_0px_0px_rgba\(26\,26\,26\,1\)\] { box-shadow: 4px 4px 0px 0px rgba(26,26,26,1); }
+#kv-music-widget .shadow-\[0px_4px_0px_0px_rgba\(26\,26\,26\,1\)\] { box-shadow: 0px 4px 0px 0px rgba(26,26,26,1); }
+#kv-music-widget .shadow-\[1px_1px_0px_0px_rgba\(26\,26\,26\,1\)\] { box-shadow: 1px 1px 0px 0px rgba(26,26,26,1); }
+#kv-music-widget input[type="range"] {
+-webkit-appearance: none;
+appearance: none;
+width: 100%;
+height: 6px;
+background: #1a1a1a;
+border-radius: 3px;
+cursor: pointer;
+padding: 0;
+margin: 0;
+}
+#kv-music-widget input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 12px;
+height: 12px;
+background: #7DD3FC;
+border: 2px solid #1a1a1a;
+border-radius: 50%;
+cursor: pointer;
+margin-top: 0;
+}
+#kv-music-widget input[type="range"]::-moz-range-thumb {
+width: 12px;
+height: 12px;
+background: #7DD3FC;
+border: 2px solid #1a1a1a;
+border-radius: 50%;
+cursor: pointer;
+}
+#kv-music-widget input[type="range"]::-webkit-slider-runnable-track {
+height: 6px;
+background: #1a1a1a;
+border-radius: 3px;
+}
+@keyframes kv-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+#kv-music-widget .spinning { animation: kv-rotate 4s linear infinite; }
+@keyframes kv-equalizer { 0%, 100% { height: 4px; } 50% { height: 10px; } }
+#kv-music-widget .equalizer-bar { animation: kv-equalizer 0.4s ease-in-out infinite; }
+#kv-music-widget .equalizer-bar:nth-child(2) { animation-delay: 0.1s; }
+#kv-music-widget .equalizer-bar:nth-child(3) { animation-delay: 0.2s; }
+#kv-music-widget .equalizer-bar:nth-child(4) { animation-delay: 0.3s; }
+</style>
+</body>
+</html>
